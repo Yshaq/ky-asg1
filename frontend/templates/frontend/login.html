@@ -1,16 +1,40 @@
 {% extends 'frontend/base.html' %}
 {% block content %}
 
-<h1>Login</h1>
-<form action="">
-    <input type="text" name="email" id="email" placeholder="email" required>
-    <input type="password" name="password" id="password" placeholder="password">
-    <button type="button" id="login-button">Log In</button>
+
+<form action="" class="container">
+
+    <h2>Login</h2>
+    <div class="form-row form-group">
+        <div class="col-sm-6 label-column">
+            <label class="col-form-label">Email </label>
+        </div>
+        <div class="col-sm-8 input-column">
+            <input class="form-control" type="text" name="email" id="email" placeholder="email" required>
+        </div>
+    </div>
+
+    <br>
+    <div class="form-row form-group">
+        <div class="col-sm-6 label-column">
+            <label class="col-form-label">Password </label>
+        </div>
+        <div class="col-sm-8 input-column">
+            <input class="form-control" type="password" name="password" id="password" placeholder="password">
+        </div>
+    </div>
+
+    <br>
+
+
+    <button type="button" class="btn btn-primary" id="login-button">Log In</button>
+
+    <br>
+    <a href="{% url 'landing' %}" class="btn btn-secondary my-4">Home</a>
 </form>
 
-<p>
-    <a href="{% url 'landing' %}">Home</a>
-</p>
+
+
 
 <script>
     function login() {

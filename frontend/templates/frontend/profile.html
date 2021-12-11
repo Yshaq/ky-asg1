@@ -2,17 +2,20 @@
 {% block content %}
 
 <style>
-
+    .profile {
+        margin: 20px auto;
+        border: solid black 2px;
+        width: 50%;
+    }
 </style>
 
-<div id="profile">
+<div id="profile" class="profile container p-4">
     <p id="name">NOT LOGGED IN</p>
-    <p id="email"></p>
+    <p id="email"></p>        
+    <button type="button" id="logout-button" class="btn btn-primary">Logout</button>
 </div>
 
-<div>
-    <button type="button" id="logout-button">Logout</button>
-</div>
+
 
 <script>
     function logout() {
@@ -35,8 +38,8 @@
     })
     .then(res => {
         console.log(res);
-        document.getElementById("name").innerHTML = `Welcome ${res.data.name}`;
-        document.getElementById("email").innerHTML = res.data.email;
+        document.getElementById("name").innerHTML = `Welcome ${res.data.name} !`;
+        document.getElementById("email").innerHTML = `Email: ${res.data.email}`;
     })
     .catch(err => {
         console.log(err.response);

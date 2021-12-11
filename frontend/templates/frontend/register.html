@@ -1,15 +1,44 @@
 {% extends 'frontend/base.html' %}
 {% block content %}
 
-<h1>Registration Page</h1>
+<form action="" class="container">
 
-<input type="text" name="fname" required id="fname" placeholder="name">
-<input type="email" name="email" id="email" placeholder="email" required>
-<input type="password" name="password" id="password" required placeholder="password">
-<button type="button" id="register-button">Register</button>
-<p>
-    <a href="{% url 'landing' %}">Home</a>
-</p>
+    <h2>Register</h2>
+
+    <div class="form-row form-group">
+        <div class="col-sm-6 label-column">
+            <label class="col-form-label">Name </label>
+        </div>
+        <div class="col-sm-8 input-column">
+            <input class="form-control" type="text" name="fname" required id="fname" placeholder="name">
+        </div>
+    </div>
+    <br>
+
+    <div class="form-row form-group">
+        <div class="col-sm-6 label-column">
+            <label class="col-form-label">Email </label>
+        </div>
+        <div class="col-sm-8 input-column">
+            <input class="form-control" type="email" name="email" id="email" placeholder="email" required>
+        </div>
+    </div>
+    <br>
+
+    <div class="form-row form-group">
+        <div class="col-sm-6 label-column">
+            <label class="col-form-label">Password </label>
+        </div>
+        <div class="col-sm-8 input-column">
+            <input class="form-control" type="password" name="password" id="password" required placeholder="password">
+        </div>
+    </div>
+    <br>
+
+    <button class="btn btn-primary" type="button" id="register-button">Register</button>
+    <br>
+    <a href="{% url 'landing' %}" class="btn btn-secondary my-4">Home</a>
+</form>
 
 <script>
     
@@ -23,19 +52,28 @@
             "email": email,
             "password": password
         }
-
-        fetch("{% url 'api-register' %}", {
-            method: 'POST',
+        
+        axios({
+            url: "{% url 'api-register' %}",
+            method: 'post',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(data)
+            data: {
+                name: fname,
+                email: email,
+                password: password,
+            }
+
         })
         .then(res => {
             if (res.status == 200) {
                 console.log("user created!");
                 window.location = "{% url 'login' %}";
             }
+        })
+        .catch(err => {
+            console.log(err.response);
         });
     }
 
