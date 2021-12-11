@@ -24,7 +24,7 @@
     token = localStorage.getItem('jwt')
 
     axios({
-        url: 'http://localhost:8000/api/user/',
+        url: '{% url "api-user" %}',
         method: 'post',
         headers: {
             'Content-Type': 'application/json'

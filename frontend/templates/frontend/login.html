@@ -24,7 +24,7 @@
 
         axios({
             method: 'post',
-            url: 'http://localhost:8000/api/login/',
+            url: '{% url "api-login" %}',
             data: {
                 email: email,
                 password: password,
