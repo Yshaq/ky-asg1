@@ -1,0 +1,48 @@
+{% extends 'frontend/base.html' %}
+{% block content %}
+
+<style>
+
+</style>
+
+<div id="profile">
+    <p id="name">NOT LOGGED IN</p>
+    <p id="email"></p>
+</div>
+
+<div>
+    <button type="button" id="logout-button">Logout</button>
+</div>
+
+<script>
+    function logout() {
+        localStorage.removeItem("jwt");
+        console.log("loggedout!");
+        window.location = "{% url 'landing' %}"
+    }
+
+    token = localStorage.getItem('jwt')
+
+    axios({
+        url: 'http://localhost:8000/api/user/',
+        method: 'post',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        data: {
+            jwt: token
+        }
+    })
+    .then(res => {
+        console.log(res);
+        document.getElementById("name").innerHTML = `Welcome ${res.data.name}`;
+        document.getElementById("email").innerHTML = res.data.email;
+    })
+    .catch(err => {
+        console.log(err.response);
+    });
+
+    document.getElementById("logout-button").addEventListener("click", logout)
+</script>
+
+{% endblock %}
